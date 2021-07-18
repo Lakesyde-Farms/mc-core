@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <http.h>
+#include <sense.h>
 
 #include <ESP8266WiFi.h>
 
@@ -11,6 +12,8 @@ ESP8266WiFiMulti WiFiMulti;
 StaticJsonDocument<256> doc;
 
 JsonObject sensors = doc.createNestedObject("sensors");
+
+SensorCL ssl;
 
 
 void setup() {
@@ -33,9 +36,9 @@ void setup() {
 void loop() {
   String output;
 
-  sensors["temp"] = 43;
-  sensors["humidity"] = 83;
-  sensors["light"] = 13;
+  sensors["temp"] = ssl.tempSense();
+  sensors["humidity"] = ssl.humidSense();
+  sensors["light"] = ssl.lightSense();
 
   serializeJsonPretty(doc, output);
 
