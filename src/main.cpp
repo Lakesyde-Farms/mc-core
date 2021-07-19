@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <http.h>
 #include <sense.h>
+#include <update.h>
 
 #include <ESP8266WiFi.h>
 
@@ -36,19 +37,25 @@ void setup() {
 void loop() {
   String output;
 
-  sensors["temp"] = ssl.tempSense();
-  sensors["humidity"] = ssl.humidSense();
-  sensors["light"] = ssl.lightSense();
+  // sensors["temp"] = ssl.tempSense();
+  // sensors["humidity"] = ssl.humidSense();
+  // sensors["light"] = ssl.lightSense();
+
+  sensors["temp"] = 43;
+  sensors["humidity"] =  43;
+  sensors["light"] =  43;
 
   serializeJsonPretty(doc, output);
 
-  // Serial.print(output + "\n");
+  Serial.print(output);
+  Serial.print(" ");
+  Serial.print("\n");
 
   if ((WiFiMulti.run() == WL_CONNECTED)) {
-    // GET();
     POST(output);
   }
-
-  delay(10000);
+  delay(5000);
+  update();
+  delay(1000);
 }
 
