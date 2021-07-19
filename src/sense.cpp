@@ -17,10 +17,8 @@ float SensorCL::humidSense(){
 float SensorCL::lightSense(){
   return analogRead(A0);
 };
-// float SensorCL::moistureSense(){
-//   return analogRead(A0);
-// };
-
-
+float SensorCL::moistureSense(){
+  return analogRead(A0);
+};
 
 
